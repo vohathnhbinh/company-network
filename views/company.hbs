@@ -1,0 +1,46 @@
+<div class="row justify-content-md-center" style="margin-top: 30px">
+    <div class="col-md-10">
+        <div class="card bg-light border-dark">
+            <div class="card-body">
+                <h2 class="text-center mb-4">Register company</h2>
+                <h5 class="errorMsg ml-2 text-danger"></h5>
+                <form action="/register/company" method="post" name="frmRegisterCo" id="frmRegisterCo" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="avatar" class="form-label">Logo</label>
+                        <input name="avatar" class="form-control" type="file" accept="image/*" id="avatar" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fullname">Company name</label>
+                        <input type="text" class="form-control" id="name" name="name" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="desc">Description</label>
+                        <textarea type="text" class="form-control" id="desc" name="desc" rows="10" cols="30"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mt-4">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#section 'script'}}
+    <script src="/public/lib/tinymce/tinymce.min.js"></script>
+    <script>tinymce.init({selector:'textarea'});</script>
+    <script>
+        $('#frmRegisterCo').on('submit', e =>{
+            e.preventDefault()
+            const tmp_Name = $('#name').val()
+            
+            $.getJSON(`/register/is-available?name=${tmp_Name}`,data=>{
+                if (data === true){
+                    $('#frmRegisterCo').off('submit').submit()
+                }
+                else{
+                    $('#errorMsg').html('This name is not available')
+                    return
+                }
+            })
+        })
+    </script>
+{{/section}}

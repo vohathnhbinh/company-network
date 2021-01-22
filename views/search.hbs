@@ -1,0 +1,40 @@
+<div class="card">
+    <h3 class="card-title text-center mt-3">Companies</h3>
+    {{#if empty}}
+    <div class="card-body">
+        <p class="card-text">No data</p>
+    </div>
+    {{else}}
+        <div class="card-body">
+            <div class="row">
+                {{#each companies}}
+                    <div class="col-sm-4 mb-3">
+                        <div class="card h-100">        
+                            <img src="/public/images/{{this.name}}/{{this.logo}}" class="card-img-top" alt="{{this.name}}">
+                            <div class="card-body">
+                                <h3 class="card-title">{{this.name}}</h3>
+                                <p class="card-text">{{{this.desc}}}</p>
+                            </div>
+                            <div class="card-footer">
+                                <a class="btn btn-sm btn-outline-primary mr-2" href="/search/detail?companyId={{this._id}}" role="button">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                    Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    {{/if}}
+</div>
+
+{{#section 'style'}}
+    <style>
+        .card-img-top {
+            width: 100%;
+            height: 25vw;
+            object-fit: cover;
+        }
+    </style>
+{{/section}}

@@ -1,0 +1,11 @@
+body{
+    background-image: url("");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+footer {
+    background: lightblue;
+    vertical-align: top;
+    margin-top: 150px;
+}

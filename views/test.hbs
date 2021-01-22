@@ -1,0 +1,95 @@
+<div class="row justify-content-md-center" style="margin-top: 30px">
+    <div class="col-md-6">
+        <div class="card bg-light border-dark h-100">
+            <div class="card-body">
+                <h2 class="text-center mb-4">Make test</h2>
+                <form action="/makeexam" method="post" name="frmTest" id="frmTest">
+                    <div class="form-group">
+                        <label for="content">Content</label>
+                        <textarea type="text" class="form-control" id="content" name="content" rows="10" cols="30"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-light border-dark h-100">
+            <div class="card-body">
+                <h2 class="text-center mb-4">Additional info</h2>
+                {{#if fail}}
+                    {{#each errors}}
+                        <div class="alert alert-danger" role="alert">
+                            {{this.msg}}
+                        </div>
+                    {{/each}}
+                {{/if}}
+                <form action="/makeexam" method="post" name="frmAdd" id="frmAdd">
+                    <div class="form-group">
+                        <label for="name">Test name</label>
+                        <input type="text" class="form-control" id="name" name="name" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="test_length">Test duration (minute)</label>
+                        <input type="number" class="form-control" id="test_length" name="test_length" placeholder="120" max="120" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="end_date">Expiration date</label>
+                        <input type="date" class="form-control" id="end_date" name="end_date" min="" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="max_examinee">Examinee limit</label>
+                        <input type="number" class="form-control" id="max_examinee" name="max_examinee" max="10000" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mt-4">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="testId" value={{test}}>
+
+{{#section 'script'}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="/public/lib/tinymce/tinymce.min.js"></script>
+    <script>tinymce.init({selector:'textarea'});</script>
+    <script>
+        $(document).ready(() => {
+            const testId = $('#testId').val()
+            if(testId) {
+                Swal.fire({
+                    title: 'Make test success',
+                    text: `Copy down this test id and use it to post the test: ${testId}`,
+                    icon: 'success'
+                })
+            }
+
+            var today = new Date()
+            var dd = today.getDate()
+            var mm = today.getMonth()+1 //January is 0!
+            var yyyy = today.getFullYear()
+            if(dd<10){
+                    dd='0'+dd
+                } 
+                if(mm<10){
+                    mm='0'+mm
+                } 
+
+            today = yyyy+'-'+mm+'-'+dd
+            document.getElementById("end_date").setAttribute("min", today)
+        })
+        $('#frmAdd').on('submit', e =>{
+            e.preventDefault()
+            const tmp_Name = $('#name').val()
+            
+            $.getJSON(`/makeexam/is-available?name=${tmp_Name}`,data=>{
+                if (data === true){
+                    $('#frmAdd').off('submit').submit()
+                }
+                else{
+                    $('#errorMsg').html('This name is not available')
+                    return
+                }
+            })
+        })
+    </script>
+{{/section}}

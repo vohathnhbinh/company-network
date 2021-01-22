@@ -1,0 +1,29 @@
+<div class="row justify-content-md-center" style="margin-top: 30px">
+    <div class="col-md-10">
+        <div class="card bg-light border-dark">
+            <div class="card-body">
+                <h2 class="text-center mb-4">Post</h2>
+                <form action="/post" method="post" name="frmPost" id="frmPost" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="image" class="form-label">Image</label>
+                        <input name="image" class="form-control" type="file" accept="image/*" id="image" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Content</label>
+                        <textarea type="text" class="form-control" id="content" name="content" rows="10" cols="30"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="test">Test ID</label>
+                        <input type="text" class="form-control" id="test" name="test" placeholder="Go to My Tests to check for Test ID"></input>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mt-4">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#section 'script'}}
+    <script src="/public/lib/tinymce/tinymce.min.js"></script>
+    <script>tinymce.init({selector:'textarea'});</script>
+{{/section}}
