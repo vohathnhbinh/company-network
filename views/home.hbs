@@ -61,6 +61,8 @@
             {{/ifExpired}}
             <h4 class="my-2">Result</h4>
             <input type="hidden" id="success" value={{../success}}>
+            <input type="hidden" id="expired" value={{../expired}}>
+            <input type="hidden" id="limited" value={{../limited}}>
 
             <table class="table table-hover" style="table-layout: fixed">
                 <thead>
@@ -87,17 +89,32 @@
     <script>
         $(document).ready(() => {
             const isSuccess = $('#success').val()
+            const isExpired = $('#expired').val()
+            const isLimited = $('#limited').val()
             if(isSuccess === 'true') {
                 Swal.fire({
                     title: 'Test complete',
                     text: 'See your score at the post',
                     icon: 'success'
                 })
-            }
-            if(isSuccess === 'false') {
+            } else if(isSuccess === 'false') {
                 Swal.fire({
-                    title: 'Test fail',
+                    title: 'Join fail',
                     text: 'You have already joined the test',
+                    icon: 'error'
+                })
+            }
+            if(isExpired === 'true') {
+                Swal.fire({
+                    title: 'Join fail',
+                    text: 'The test has been expired',
+                    icon: 'error'
+                })
+            }
+            if(isLimited === 'true') {
+                Swal.fire({
+                    title: 'Join fail',
+                    text: 'The test has reached its limit',
                     icon: 'error'
                 })
             }

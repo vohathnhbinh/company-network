@@ -31,7 +31,9 @@ router.get('/', async (req, res) => {
             user: req.user ? req.user._doc : null,
             company,
             posts,
-            success: req.query.success
+            success: req.query.success,
+            expired: req.query.expired,
+            limited: req.query.limited
         })
     } catch(err) {
         console.log(err)
@@ -46,6 +48,8 @@ router.get('/taketest', authenticate.checkAuthenticated, authenticate.checkCompa
             'examinees.user': req.user._doc._id
         })
         let success = false
+        let expired = false
+        let limited = false
         if(!altTest) {
             const examinee = {
                 user: req.user._doc._id,
@@ -63,9 +67,12 @@ router.get('/taketest', authenticate.checkAuthenticated, authenticate.checkCompa
                 }
             )
             success = true
+            const today = new Date()
+            if(test.end_date.getTime() === today.getTime()) expired = true
+            if(test.max_examinee === test.examinees.length) limited = true
         }
 
-        res.redirect(`/?success=${success}`)
+        res.redirect(`/?success=${success}&expired=${expired}&limited=${limited}`)
     } catch(err) {
         console.log(err)
     }
