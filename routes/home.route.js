@@ -40,7 +40,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/taketest', authenticate.checkAuthenticated, authenticate.checkCompany, async (req, res) => {
+router.get('/taketest', authenticate.checkAuthenticated, async (req, res) => {
     const testId = req.query.testId
     try {
         const altTest = await Test.findOne({

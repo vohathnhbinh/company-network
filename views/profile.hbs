@@ -1,0 +1,313 @@
+<h1 class="text-center mt-3">Edit profile</h1>
+<h3 name="errorMsg" id="errorMsg" class="text-center bg-danger mt-3">
+    {{#if isSuccessful}}
+        Password updated!
+    {{/if}}
+</h3>
+<div class="mx-5" style="margin-top: 30px">
+    <table class="table table-hover" style="table-layout: fixed" id="profile">
+        <tr data-toggle="collapse" data-target="#collapseFullname">
+            <th>Fullname</th>
+            <td>{{user.fullname}}</td>
+            <td class="small-col"><i class="fas fa-edit"></i></td>
+            <td class="blue">Edit</td>
+        </tr>
+        <tr class="non-hover">
+            <td colspan="4">
+                <div class="collapse" id="collapseFullname" data-parent="#profile">
+                    <div class="row justify-content-md-center">
+                        <form class="col-md-4" action="/profile" method="post" name="frmFullname" id="frmFullname">
+                            <label for="fullname">Fullname</label>
+                            <input type="text" class="form-control" id="fullname" name="fullname" required>
+                            <button type="submit" class="btn btn-primary btn-block mt-2">Save change</button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+        <tr data-toggle="collapse" data-target="#collapseUsername">
+            <th>Username</th>
+            <td>{{user.username}}</td>
+            <td class="small-col"><i class="fas fa-edit"></i></td>
+            <td class="blue">Edit</td>
+        </tr>
+        <tr class="non-hover">
+            <td colspan="4">
+                <div class="collapse" id="collapseUsername" data-parent="#profile">
+                    <div class="row justify-content-md-center">
+                        <form class="col-md-4" action="/profile" method="post" name="frmUsername" id="frmUsername">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                            <button type="submit" class="btn btn-primary btn-block mt-2">Save change</button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+        <tr data-toggle="collapse" data-target="#collapseEmail">
+            <th>Email</th>
+            <td>{{user.email}}</td>
+            <td class="small-col"><i class="fas fa-edit"></i></td>
+            <td class="blue">Edit</td>
+        </tr>
+        <tr class="non-hover">
+            <td colspan="4">
+                <div class="collapse" id="collapseEmail" data-parent="#profile">
+                    <div class="row justify-content-md-center">
+                        <form class="col-md-4" action="/profile" method="post" name="frmEmail" id="frmEmail">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                            <button type="submit" class="btn btn-primary btn-block mt-2">Save change</button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+        <tr data-toggle="collapse" data-target="#collapsePassword">
+            <th colspan="2" style="text-align: center;">Password</th>
+            <td class="small-col"><i class="fas fa-edit"></i></td>
+            <td class="blue">Edit</td>
+        </tr>
+        <tr class="non-hover">
+            <td colspan="4">
+                <div class="collapse" id="collapsePassword" data-parent="#profile">
+                    <div class="row justify-content-md-center">
+                        <form class="col-md-4" action="/profile" method="post" name="frmPassword" id="frmPassword">
+                            <label for="o_password">Current password</label>
+                            <input type="password" class="form-control" id="o_password" name="o_password" required>
+                            <label for="n_password">New password</label>
+                            <input type="password" class="form-control" id="n_password" name="n_password" required>
+                            <button type="submit" class="btn btn-primary btn-block mt-2">Save change</button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        
+        <tr data-toggle="collapse" data-target="#collapseAge">
+            <th>Age</th>
+            <td>{{user.age}}</td>
+            <td class="small-col"><i class="fas fa-edit"></i></td>
+            <td class="blue">Edit</td>
+        </tr>
+        <tr class="non-hover">
+            <td colspan="4">
+                <div class="collapse" id="collapseAge" data-parent="#profile">
+                    <div class="row justify-content-md-center">
+                        <form class="col-md-4" action="/profile" method="post" name="frmAge" id="frmAge">
+                            <label for="age">Age</label>
+                            <input type="number" class="form-control" id="age" name="age" max="100" required>
+                            <button type="submit" class="btn btn-primary btn-block mt-2">Save change</button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+        <tr data-toggle="collapse" data-target="#collapsePhone">
+            <th>Phone number</th>
+            <td>{{user.phone_num}}</td>
+            <td class="small-col"><i class="fas fa-edit"></i></td>
+            <td class="blue">Edit</td>
+        </tr>
+        <tr class="non-hover">
+            <td colspan="4">
+                <div class="collapse" id="collapsePhone" data-parent="#profile">
+                    <div class="row justify-content-md-center">
+                        <form class="col-md-4" action="/profile" method="post" name="frmPhone" id="frmPhone">
+                            <label for="phone_num">Phone number</label>
+                            <input type="text" class="form-control" id="phone_num" name="phone_num" required>
+                            <button type="submit" class="btn btn-primary btn-block mt-2">Save change</button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+        {{#if user.company}}
+        <tr data-toggle="collapse" data-target="#collapseName">
+            <th>Company name</th>
+            <td>{{user.company.name}}</td>
+            <td class="small-col"><i class="fas fa-edit"></i></td>
+            <td class="blue">Edit</td>
+        </tr>
+        <tr class="non-hover">
+            <td colspan="4">
+                <div class="collapse" id="collapseName" data-parent="#profile">
+                    <div class="row justify-content-md-center">
+                        <form class="col-md-4" action="/profile/company" method="post" name="frmName" id="frmName">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                            <button type="submit" class="btn btn-primary btn-block mt-2">Save change</button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+        <tr data-toggle="collapse" data-target="#collapseDesc">
+            <th>Description</th>
+            <td>{{{user.company.desc}}}</td>
+            <td class="small-col"><i class="fas fa-edit"></i></td>
+            <td class="blue">Edit</td>
+        </tr>
+        <tr class="non-hover">
+            <td colspan="4">
+                <div class="collapse" id="collapseDesc" data-parent="#profile">
+                    <div class="row justify-content-md-center">
+                        <form class="col-md-10" action="/profile/company" method="post" name="frmDesc" id="frmDesc">
+                            <label for="desc">Description</label>
+                            <textarea type="text" class="form-control" id="desc" name="desc" rows="20" cols="30"></textarea>
+                            <button type="submit" class="btn btn-primary btn-block mt-2">Save change</button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {{/if}}
+    </table>
+</div>     
+<input type="hidden" id="success" value={{isSuccessful}}>
+
+{{#section 'script'}}
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/o2ds10rhf7w3ectp2eh67hk821s2eq0sgrj2dys1gw00f7oj/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+        selector: '#desc'
+    });
+    </script>
+    <script>
+        $(document).ready(() => {
+            const isSuccessful = $('#success').val()
+            if(isSuccessful === 'true') {
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Password changed successfully',
+                    icon: 'success'
+                })
+            }
+        })
+
+        $('#frmUsername').on('submit', e => {
+            e.preventDefault()
+            const temp_username = $('#username').val()
+            if (temp_username.length < 6) {
+                $('#errorMsg').html('Username must have at least 6 characters')
+                return
+            }
+            $.getJSON(`/profile/is-available?username=${temp_username}`, data => {
+                if (data === true) {
+                    $('#frmUsername').off('submit').submit()
+                } else {
+                    $('#errorMsg').html('Username is not available')
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Username is not available',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    })
+                    return
+                }
+            }) 
+        })
+
+        $('#frmEmail').on('submit', e => {
+            e.preventDefault()
+            const temp_email = $('#email').val()
+            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            if(re.test(String(temp_email).toLocaleLowerCase())) {
+                $('#errorMsg').html('Email is invalid')
+                return
+            }
+            $.getJSON(`/profile/is-available?email=${temp_email}`, data => {
+                if (data === true) {
+                    $('#frmEmail').off('submit').submit()
+                } else {
+                    $('#errorMsg').html('Email is already in use')
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Email is already in use',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    })
+                    return
+                }
+            }) 
+        })
+
+        $('#frmPassword').on('submit', e => {
+            e.preventDefault()
+            const temp_o_password = $('#o_password').val()
+            const temp_n_password = $('#n_password').val()
+            if (temp_o_password.length < 6 || temp_n_password.length < 6) {
+                $('#errorMsg').html('Password must have at least 6 characters')
+                return
+            }
+            if (temp_o_password === temp_n_password) {
+                $('#errorMsg').html('Your new password must be different from the old one')
+                return
+            }
+            $.getJSON(`/profile/is-found?password=${temp_o_password}`, data => {
+                if (data === true) {
+                    $('#frmPassword').off('submit').submit()
+                } else {
+                    $('#errorMsg').html('Password is incorrect')
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Password is incorrect',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    })
+                    return
+                }
+            })
+        })
+
+        $('#frmName').on('submit', e => {
+            e.preventDefault()
+            const temp_name = $('#name').val()
+            $.getJSON(`/profile/is-available?name=${temp_name}`, data => {
+                if (data === true) {
+                    $('#frmName').off('submit').submit()
+                } else {
+                    $('#errorMsg').html('Company name is not available')
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Company name is not available',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    })
+                    return
+                }
+            }) 
+        })
+    </script>
+{{/section}}
+
+{{#section 'style'}}
+    <style>
+        .table-hover>tbody>tr.non-hover:hover {
+            background-color: transparent;
+        }
+        .table-hover>tbody>tr>th,
+        .table-hover>tbody>tr>td {
+            border: none;
+        }
+        .table i.fas {
+            display: none;
+        }
+        .table-hover>tbody>tr:hover i.fas {
+            display: inline-block;
+        }
+        td.small-col {
+            width: 1px;
+        }
+        .table-hover>tbody>tr:hover td.blue {
+            color: blue;
+        }
+    </style>
+{{/section}}

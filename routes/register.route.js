@@ -106,7 +106,7 @@ router.post('/company', upload.single('avatar'), async (req, res) => {
             }
         )
 
-        const trueDir = './public/images/' + company.name
+        const trueDir = './public/images/' + company._id
         await fs.promises.mkdir(trueDir, { recursive: true })
 
         await fs.promises.rename(

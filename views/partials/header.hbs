@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand text-danger" href="/"><img src="/public/logo.png" alt="CO-SO" width="100" height="100"></a>
+    <a class="navbar-brand text-danger ml-2" href="/"><img src="/public/logo.png" alt="CO-SO" width="150" height="150"></a>
     <form action="/search" class="form-inline my-2 my-lg-0 mx-2" method="GET">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" name="q">
         <button class="btn btn-success my-2 my-sm-0" type="submit">
@@ -32,6 +32,10 @@
                 <h4>Register company</h4>
             </a></li>
             {{/if}}
+            <li class="nav-item"><a class="nav-link" href="/profile">
+                <i class="fas fa-user-edit fa-2x ml-3 pl-1"></i>
+                <h4>Profile</h4>
+            </a></li>
         {{else}}
             <li class="nav-item"><a class="nav-link" href="/register">
                 <i class="fas fa-user-plus fa-2x ml-4 pl-1"></i>

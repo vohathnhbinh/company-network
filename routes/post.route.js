@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const User = require('../models/user')
 const Company = require('../models/company')
 const Post = require('../models/post')
 const authenticate = require('../middlewares/authentication')
@@ -44,7 +43,7 @@ router.post('/', upload.single('image'), async (req, res) => {
         })
         await post.save()
 
-        const trueDir = './public/images/' + company.name
+        const trueDir = './public/images/' + company._id
         await fs.promises.mkdir(trueDir, { recursive: true })
 
         await fs.promises.rename(

@@ -1,7 +1,7 @@
 <div class="home">
     <div class="introduce">
         <div class="logo-introduce">
-            <img src="/public/images/{{company.name}}/{{company.logo}}" alt="{{company.name}}">
+            <img src="/public/images/{{company._id}}/{{company.logo}}" alt="{{company.name}}">
         </div>
         <h4 class="hello-introduce text-center">
             Welcome to {{company.name}}
@@ -15,13 +15,13 @@
         {{#each posts}}
         <div class="post">
             <div class="introduce-user mt-3">
-                <img class="logo mt-3" src="/public/images/{{this.company.name}}/{{this.company.logo}}">
+                <img class="logo mt-3" src="/public/images/{{this.company._id}}/{{this.company.logo}}" alt="logo {{this.company.name}}">
                 <div class="name-date ml-3">
                     <span>{{this.company.name}}</span>
                     <span class="date">{{dateFormat this.createdOn "dddd, MMMM Do YYYY, h:mm:ss a"}}</span>
                 </div>
             </div>
-            <img class="image mt-5" src="/public/images/{{this.company.name}}/{{this.image}}" />
+            <img class="image mt-5" src="/public/images/{{this.company._id}}/{{this.image}}" alt="image {{this.company.name}}" />
             <div class="content-post mt-5">{{{this.content}}}</div>
 
             {{#if this.test}}
@@ -34,7 +34,7 @@
             <h4>Test has expired</h4>
             {{else}}
                 {{#ifEquals this.test.examinees.length this.test.max_examinee}}
-                <h4>Test has reached it limit</h4>
+                <h4>Test has reached its limit</h4>
                 {{else}}
                 <a href="/taketest?testId={{this.test._id}}" class="btn btn-outline-danger btn-block">Take test</a>
                 {{/ifEquals}}

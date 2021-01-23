@@ -1,12 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
-const Company = require('../models/company')
 const Test = require('../models/test')
-const bcrypt = require('bcrypt')
 const authenticate = require('../middlewares/authentication')
 
-router.get('/', (req, res) => {
+router.get('/', authenticate.checkAuthenticated, authenticate.checkCompany, (req, res) => {
     res.render('test', {
         user: req.user ? req.user._doc : null
     })
@@ -51,7 +49,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.get('/mytest', async (req, res) => {
+router.get('/mytest', authenticate.checkAuthenticated, authenticate.checkCompany, async (req, res) => {
     try {
         const user = await User.findOne({
             _id: req.user._doc._id

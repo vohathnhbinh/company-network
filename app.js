@@ -57,6 +57,7 @@ app.use('/register', require('./routes/register.route'))
 app.use('/post', require('./routes/post.route'))
 app.use('/search', require('./routes/search.route'))
 app.use('/makeexam', require('./routes/test.route'))
+app.use('/profile', require('./routes/edit.route'))
 
 app.use(function(req,res){
     res.render('404',{
