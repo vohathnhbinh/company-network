@@ -4,6 +4,7 @@ const Company = require('../models/company')
 const Post = require('../models/post')
 const Test = require('../models/test')
 const utils = require('../config/utils')
+const authenticate = require('../middlewares/authentication')
 
 router.get('/', async (req, res) => {
     try {
@@ -37,7 +38,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/taketest', async (req, res) => {
+router.get('/taketest', authenticate.checkAuthenticated, authenticate.checkCompany, async (req, res) => {
     const testId = req.query.testId
     try {
         const altTest = await Test.findOne({

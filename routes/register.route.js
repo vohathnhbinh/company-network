@@ -9,7 +9,7 @@ const multer = require('multer')
 const fs = require('fs')
 const { findOneAndUpdate } = require('../models/user')
 
-router.get('/', authenticate.checkNotAuthenticated, authenticate.checkNotLocked, (req, res) => {
+router.get('/', authenticate.checkNotAuthenticated, (req, res) => {
     res.render('register')
 })
 

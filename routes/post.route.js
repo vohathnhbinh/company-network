@@ -8,7 +8,7 @@ const multer = require('multer')
 const fs = require('fs')
 const utils = require('../config/utils')
 
-router.get('/', authenticate.checkAuthenticated, (req, res) => {
+router.get('/', authenticate.checkAuthenticated, authenticate.checkCompany, (req, res) => {
     res.render('post', {
         user: req.user ? req.user._doc : null
     })

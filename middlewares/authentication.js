@@ -13,36 +13,13 @@ module.exports = {
 
         next()
     },
-    checkVerified: (req, res, next) => {
-        if(req.user._doc.activated) {
-            return next()
-        }
-
-        res.redirect('/verify')
-    },
-    checkNotVerified: (req, res, next) => {
-        if(req.user._doc.activated) {
-            return res.redirect('/')
-        }
-
-        next()
-    },
-    checkAdmin: (req, res, next) => {
+    checkCompany: (req, res, next) => {
         if(req.user) {
-            if(req.user._doc.role === 2) {
+            if(req.user._doc.company) {
                 return next()
             }
         }
         
-        res.redirect('/')
-    },
-    checkNotLocked: (req, res, next) => {
-        if(req.user) {
-            if(req.user._doc.locked) {
-                return res.redirect('/')
-            }
-        }
-
-        next()
+        res.redirect('/register/company')
     }
 }

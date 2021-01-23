@@ -12,5 +12,11 @@ module.exports = hbs => {
             return (!arg1.equals(arg2) ) ? options.fn(this) : options.inverse(this)
         } else return options.inverse(this)
     }),
-    hbs.handlebars.registerHelper('dateFormat', require('handlebars-dateformat'))
+    hbs.handlebars.registerHelper('dateFormat', require('handlebars-dateformat')),
+    hbs.handlebars.registerHelper('ifExpired', function(arg, options) {
+        if(arg != null) {
+            const today = new Date()
+            return (arg.getTime() === today.getTime()) ? options.fn(this) : options.inverse(this)
+        } else return options.inverse(this)
+    })
 }

@@ -50,7 +50,15 @@
                 <h5>Expiration date: {{dateFormat this.test.end_date "dddd, MMMM Do YYYY, h:mm:ss a"}}</h5>
                 <h5>Examinee limit: {{this.test.max_examinee}}</h5>
             </div>
-            <a href="/taketest?testId={{this.test._id}}" class="btn btn-outline-danger btn-block">Take test</a>
+            {{#ifExpired this.test.end_date}}
+            <h4>Test has expired</h4>
+            {{else}}
+                {{#ifEquals this.test.examinees.length this.test.max_examinee}}
+                <h4>Test has reached it limit</h4>
+                {{else}}
+                <a href="/taketest?testId={{this.test._id}}" class="btn btn-outline-danger btn-block">Take test</a>
+                {{/ifEquals}}
+            {{/ifExpired}}
             <h4 class="my-2">Result</h4>
             <input type="hidden" id="success" value={{../success}}>
 
